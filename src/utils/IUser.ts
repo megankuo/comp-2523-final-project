@@ -15,10 +15,10 @@ export interface IUser {
   photo?: string; // path to image file
 
   // account activity
-  following: Number[]; // array of user ids
-  followedBy: Number[]; // array of user ids
-  createdPosts: Number[]; // array of original post ids
-  sharedPosts: Number[]; // array of shared post ids
+  following: number[]; // array of user ids
+  followedBy: number[]; // array of user ids
+  createdPosts: number[]; // array of original post ids
+  sharedPosts: number[]; // array of shared post ids
 
   //functions
   createPost(postContent: string): void;
