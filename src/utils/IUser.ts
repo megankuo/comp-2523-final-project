@@ -18,11 +18,8 @@ export interface IUser {
   following: number[]; // array of user ids
   followedBy: number[]; // array of user ids
   createdPosts: number[]; // array of original post ids
-  sharedPosts: number[]; // array of shared post ids
+  repostedPosts: number[]; // array of shared post ids
 
   //functions
-  createPost(postContent: string): void;
-  sharePost(postId: number): void;
-  likePost(postId: number): void;
   updatePhoto(newImage: string): void;
 }
