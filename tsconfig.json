@@ -1,31 +1,24 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "outDir": "dist/",
-    "noImplicitAny": true,
-    "sourceMap": true,
     "target": "ESNext",
+    "module": "commonjs",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
     "allowJs": true,
-    "checkJs": false,
-    "pretty": true,
-    "skipLibCheck": true,
     "strict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": false,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "ESNext"
-    ],
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "src",
-    "**/src/**/*.ts"
-  ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "coverage",
+    "babel.config.js"
   ]
 }
