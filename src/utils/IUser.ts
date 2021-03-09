@@ -1,8 +1,4 @@
 export default interface IUser {
-  length: number;
-  compare(leftPos: number, rightPos: number): boolean;
-  swap(left: number, right: number): void;
-
   // account information
   id: number;
   email: string;
