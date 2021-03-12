@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev --respawn --transpile-only ./src/server.ts"
+    "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
+    "start": "node dist/server.js",
+    "postinstall": "npm run build",
+    "build": "tsc && <cpxCommand>"
   },
   "prettier": {
     "printWidth": 120
@@ -32,7 +35,7 @@
     "typescript": "^4.2.3"
   },
   "devDependencies": {
-    "@types/express": "^4.17.9",
+    "@types/express": "^4.17.11",
     "@types/express-session": "^1.17.3",
     "@types/node": "^14.14.19",
     "@types/node-fetch": "^2.5.7",
