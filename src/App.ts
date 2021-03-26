@@ -1,10 +1,11 @@
 import express from "express";
+import dotenv from "dotenv";
 import errorMiddleware from "./middleware/error.middleware";
 import Controller from "./interfaces/controller.interface";
-import dotenv from "dotenv";
 
 class App {
   private _app: express.Application;
+
   private readonly _port: number | string = process.env.PORT || 5000;
 
   constructor(controllers: Controller[]) {
