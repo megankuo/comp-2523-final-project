@@ -46,4 +46,8 @@ export default class PassportConfig {
       }
     });
   }
+
+  get strategy(): passportLocal.Strategy {
+    return this._strategy;
+  }
 }

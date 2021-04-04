@@ -6,12 +6,6 @@ module.exports = (app) => {
   app.use(passport.initialize());
   app.use(passport.session());
   // Use PassportConfig class here
-  app.use(new PassportConfig(new MockAuthenticationService()));
-  app.post("/login", (req, res, next) => {
-    passport.authenticate("local", {
-      successRedirect: "/",
-      failureRedirect: "/login",
-      failureFlash: true,
-    })(req, res, next);
-  });
+  const localLogin = new PassportConfig(new MockAuthenticationService());
+  passport.use(localLogin.strategy);
 };

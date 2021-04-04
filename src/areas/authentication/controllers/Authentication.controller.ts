@@ -27,7 +27,12 @@ class AuthenticationController implements IController {
   };
 
   // 🔑 These Authentication methods needs to be implemented by you
-  private login = (req: express.Request, res: express.Response) => {};
+  private login = ( req: express.Request, res: express.Response ) => {
+    passport.authenticate("local", {
+      successRedirect: "/admin",
+      failureRedirect: "/auth/login",
+    });
+  };
   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {};
   private logout = async (req: express.Request, res: express.Response) => {};
 }
