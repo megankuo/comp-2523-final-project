@@ -5,7 +5,7 @@
 //    Ensure code is fully typed wherever possible (unless inference can be made)
 import passport from "passport";
 import * as passportLocal from "passport-local";
-import IUser from "src/interfaces/user.interface";
+import IUser from "../../../interfaces/user.interface";
 import { IAuthenticationService, MockAuthenticationService } from "../services";
 
 export default class PassportConfig {
