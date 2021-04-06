@@ -20,8 +20,8 @@ export default class PassportConfig {
         passwordField: "password",
       },
       // check if user exists in the database
-      (email, password, done) => {
-        this._user = authService.getUserByEmailAndPassword(email, password);
+      async (email, password, done) => {
+        this._user = await authService.getUserByEmailAndPassword(email, password);
 
         return this._user
           ? done(null, this._user)
@@ -49,5 +49,8 @@ export default class PassportConfig {
 
   get strategy(): passportLocal.Strategy {
     return this._strategy;
+  }
+  get user(): IUser {
+    return this._user;
   }
 }
