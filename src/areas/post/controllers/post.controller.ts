@@ -5,6 +5,8 @@ import { database, post, posts } from "../../../model/fakeDB";
 import IUser from "../../../interfaces/user.interface";
 import IPost from "../../../interfaces/post.interface";
 
+import { ensureAuthenticated } from "../../../middleware/authentication.middleware";
+
 class PostController implements IController {
   public path = "/posts";
   public router = Router();
@@ -15,7 +17,8 @@ class PostController implements IController {
     this._postService = postService;
   }
 
-  private initializeRoutes() {
+  private initializeRoutes () {
+    this.router.use( ensureAuthenticated );
     this.router.get(this.path, this.getAllPosts);
     this.router.get(`${this.path}/:id`, this.getPostById);
     this.router.get(`${this.path}/:id/delete`, this.deletePost);
@@ -25,8 +28,9 @@ class PostController implements IController {
 
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary posts object
   
-  private getAllPosts = (_: Request, res: Response) => {
+  private getAllPosts = (req: Request, res: Response) => {
     console.log(posts);
+    console.log(req.user);
     res.render("post/views/posts", { posts });
   };
 

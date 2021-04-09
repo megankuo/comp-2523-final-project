@@ -1,42 +1,43 @@
 {
-  "root": true,
-  "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@typescript-eslint",
-    "prettier"
-  ],
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier",
-    "airbnb-typescript/base"
-  ],
-  "parserOptions": {
-    "project": "./tsconfig.json"
+  "extends": 'airbnb-base',
+  "env": {
+    "commonjs": true,
+    "node": true,
+    "jest": true,
   },
   "rules": {
-    "no-console": "off",
-    "no-plusplus": "off",
-    "prettier/prettier": "error",
-    "arrow-body-style": "off",
-    "prefer-arrow-callback": "off",
-    "no-underscore-dangle": "off",
-    "global-require": "off",
-    "@typescript-eslint/no-var-requires": "off",
-    "@typescript-eslint/no-unused-vars": "warn",
-    "@typescript-eslint/lines-between-class-members": "warn",
-    "@typescript-eslint/quotes": "warn",
-    "@typescript-eslint/comma-dangle": "off",
-    "object-curly-newline": [
-      "error",
-      {
-        "ImportDeclaration": "never",
-        "ExportDeclaration": "never"
+    "indent": ['error',
+      4,
+      { "SwitchCase": 1
       }
     ],
-    "import/prefer-default-export": "warn",
-    "max-len": "warn",
-    "class-methods-use-this": "off"
-  }
+        'func-names': ['error', 'never'
+    ],
+        'linebreak-style': ['error', 'windows'
+    ],
+        'no-plusplus': ['error',
+      { allowForLoopAfterthoughts: true
+      }
+    ],
+        'no-param-reassign': ['error',
+      { props: true, ignorePropertyModificationsFor: ['shades', 'data', 'res'
+        ]
+      }
+    ],
+        'no-bitwise': ['error',
+      { allow: ['<<'
+        ]
+      }
+    ],
+        'max-len': ['error',
+      { code: 120
+      }
+    ],
+        'no-console': 'off',
+        'import/no-unresolved': [
+      2,
+      { caseSensitive: false
+      }
+    ],
+  },
 }
