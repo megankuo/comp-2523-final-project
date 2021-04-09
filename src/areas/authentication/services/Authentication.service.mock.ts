@@ -1,6 +1,7 @@
 import { database } from "../../../model/fakeDB";
 import IUser from "../../../interfaces/user.interface";
 import { IAuthenticationService } from "./IAuthentication.service";
+import WrongCredentialsException from "../../../exceptions/WrongCredentialsException";
 
 export class MockAuthenticationService implements IAuthenticationService {
   readonly _db = database;
@@ -10,7 +11,7 @@ export class MockAuthenticationService implements IAuthenticationService {
     const userObj = this._db.users.find((user) => user.email === email);
     if (userObj) {
       if (userObj.password !== password) {
-        throw new Error("Password is incorrect");
+        throw new WrongCredentialsException();
       } else {
         return userObj;
       }

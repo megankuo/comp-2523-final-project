@@ -34,14 +34,7 @@ class AuthenticationController implements IController {
   };
 
   // 🔑 These Authentication methods needs to be implemented by you
-  private login = (req: express.Request, res: express.Response) => {
-    // const passport = require("../../../middleware/passport.middlewares");
-    // console.log(req);
-    passport.authenticate("local", {
-      successRedirect: "/posts",
-      failureRedirect: "/auth/login",
-    });
-  };
+  private login = async (req: express.Request, res: express.Response, next: express.NextFunction) => {};
   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {};
   private logout = async (req: express.Request, res: express.Response) => {};
 }

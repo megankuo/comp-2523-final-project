@@ -4,30 +4,36 @@
 // 🚀 Configure Passport.js Local Authentication in this file
 //    Ensure code is fully typed wherever possible (unless inference can be made)
 import passport from "passport";
-import * as passportLocal from "passport-local";
+import { PassportStatic, Strategy } from "passport";
+import { IVerifyOptions, IStrategyOptions, Strategy as LocalStrategy } from "passport-local";
+import HttpException from "../../../exceptions/HttpException";
+import WrongCredentialsException from "../../../exceptions/WrongCredentialsException";
 import IUser from "../../../interfaces/user.interface";
 import { IAuthenticationService, MockAuthenticationService } from "../services";
 
 export default class PassportConfig {
-  private _strategy;
-  private _user;
-  constructor(authService: IAuthenticationService) {
-    const LocalStrategy = passportLocal.Strategy;
+  private static _localStrategy: LocalStrategy;
+  private static _user: IUser;
+  private static _strategyOptions: IStrategyOptions = {
+    usernameField: "email",
+    passwordField: "password",
+  };
+  private static _authService: IAuthenticationService;
 
-    this._strategy = new LocalStrategy(
-      {
-        usernameField: "email",
-        passwordField: "password",
-      },
+  constructor(authService: IAuthenticationService, strategyType: string) {
+    // const LocalStrategy = passportLocal.Strategy;
+    PassportConfig._authService = authService;
+
+    PassportConfig._localStrategy = new LocalStrategy(
+      PassportConfig._strategyOptions,
       // check if user exists in the database
       async (email, password, done) => {
-        this._user = await authService.getUserByEmailAndPassword(email, password);
-
-        return this._user
-          ? done(null, this._user)
-          : done(null, false, {
-              message: "Your login details are not valid. Please try again",
-            });
+        try {
+          PassportConfig._user = await authService.getUserByEmailAndPassword(email, password);
+          return done(null, PassportConfig._user);
+        } catch (e) {
+          done(null, false, e);
+        }
       }
     );
     // req.session.passport.user
@@ -37,20 +43,16 @@ export default class PassportConfig {
 
     // serializeUser creates -> req.sessions.passport.user = the user object retrieved from db
 
-    passport.deserializeUser(function (email: string, done) {
-      const user = authService.findUserByEmail(email);
-      if (user) {
-        done(null, user);
-      } else {
-        done({ message: "User not found" }, null);
-      }
+    passport.deserializeUser(async function (email: string, done) {
+      const user = await authService.findUserByEmail(email);
+      user ? done(null, user) : done({ message: "user not found" }, null);
     });
   }
 
-  get strategy(): passportLocal.Strategy {
-    return this._strategy;
+  get strategy(): LocalStrategy {
+    return PassportConfig._localStrategy;
   }
   get user(): IUser {
-    return this._user;
+    return PassportConfig._user;
   }
 }

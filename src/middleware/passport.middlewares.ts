@@ -8,7 +8,7 @@ module.exports = (app) => {
   app.use(passport.session());
   // Use PassportConfig class here
   const authService = new MockAuthenticationService();
-  const localLogin = new PassportConfig(authService);
+  const localLogin = new PassportConfig(authService, "local");
 
   // // req.session.passport.user
   // passport.serializeUser(function (user: IUser = localLogin.user, done) {
