@@ -5,11 +5,11 @@ const database: IDatabase = {
   users: [
     {
       id: "1",
+      username: "billgates",
       email: "gates@gmail.com",
       password: "gates123",
       firstName: "Bill",
       lastName: "Gates",
-      username: "billgates",
       posts: [
         {
           id: "abc1",
@@ -114,24 +114,22 @@ const post = {
 
 const posts = [
   {
-    postId: 5,
+    id: "5",
     userId: "john",
     createdAt: new Date(),
-    message: "Hi there",
-    comments: "4",
-    reposts: "2",
-    likes: "2",
     commentList: [],
+    message: "Hi there",
+    reposts: 2,
+    likes: 2,
   },
   {
-    postId: 4,
+    id: "4",
     userId: "john",
     createdAt: new Date(),
-    message: "this is a new post by me",
-    comments: "4",
-    reposts: "2",
-    likes: "2",
     commentList: [],
+    message: "this is a new post by me",
+    reposts: 2,
+    likes: 2,
   },
 ];
 
