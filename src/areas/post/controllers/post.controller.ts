@@ -12,8 +12,8 @@ class PostController implements IController {
     this.initializeRoutes();
   }
 
-  private initializeRoutes () {
-    this.router.use( ensureAuthenticated );
+  private initializeRoutes() {
+    // this.router.use( ensureAuthenticated );
     this.router.get(this.path, this.getAllPosts);
     this.router.get(`${this.path}/:id`, this.getPostById);
     this.router.get(`${this.path}/:id/delete`, this.deletePost);
