@@ -21,32 +21,33 @@ export default class PassportConfig {
   private static _authService: IAuthenticationService;
 
   constructor(authService: IAuthenticationService, strategyType: string) {
-    // const LocalStrategy = passportLocal.Strategy;
     PassportConfig._authService = authService;
+    PassportConfig._localStrategy = new LocalStrategy(PassportConfig._strategyOptions, PassportConfig.signIn);
+    passport.use(PassportConfig._localStrategy);
+    passport.serializeUser(PassportConfig.serializeUser);
+    passport.deserializeUser(PassportConfig.deserializeUser);
+  }
 
-    PassportConfig._localStrategy = new LocalStrategy(
-      PassportConfig._strategyOptions,
-      // check if user exists in the database
-      async (email, password, done) => {
-        try {
-          PassportConfig._user = await authService.getUserByEmailAndPassword(email, password);
-          return done(null, PassportConfig._user);
-        } catch (e) {
-          done(null, false, e);
-        }
-      }
-    );
-    // req.session.passport.user
-    passport.serializeUser(function (user: IUser, done) {
-      done(null, user.email);
-    });
+  private static serializeUser(user: IUser, done): void {
+    done(null, user.email);
+  }
 
-    // serializeUser creates -> req.sessions.passport.user = the user object retrieved from db
+  private static async deserializeUser(email: string, done) {
+    try {
+      const user = await PassportConfig._authService.findUserByEmail(email);
+      return done(null, user);
+    } catch (e) {
+      done({ message: "user not found" }, null);
+    }
+  }
 
-    passport.deserializeUser(async function (email: string, done) {
-      const user = await authService.findUserByEmail(email);
-      user ? done(null, user) : done({ message: "user not found" }, null);
-    });
+  private static async signIn(email: string, password: string, done) {
+    try {
+      PassportConfig._user = await PassportConfig._authService.getUserByEmailAndPassword(email, password);
+      return done(null, PassportConfig._user);
+    } catch (e) {
+      done(null, false, e);
+    }
   }
 
   get strategy(): LocalStrategy {
