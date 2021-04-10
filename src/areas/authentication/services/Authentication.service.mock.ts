@@ -8,7 +8,7 @@ export class MockAuthenticationService implements IAuthenticationService {
 
   public async getUserByEmailAndPassword(email: string, password: string): Promise<IUser> {
     // throw new Error( "Method not implemented" );
-    const userObj = this._db.users.find((user) => user.email === email);
+    const userObj = this._db.users.find((user) => user.email === email && user.password === password);
     if (userObj) {
       if (userObj.password !== password) {
         throw new WrongCredentialsException();
