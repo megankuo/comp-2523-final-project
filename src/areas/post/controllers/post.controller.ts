@@ -17,7 +17,11 @@ class PostController implements IController {
     this._postService = postService;
   }
 
+<<<<<<< HEAD
   private initializeRoutes () {
+=======
+  private initializeRoutes() {
+>>>>>>> 216a77945660185ed683adfe4dcc1f1274e78945
     // this.router.use( ensureAuthenticated );
     this.router.get(this.path, this.getAllPosts);
     this.router.get(`${this.path}/:id`, this.getPostById);
