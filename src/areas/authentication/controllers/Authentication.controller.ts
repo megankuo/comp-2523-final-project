@@ -49,7 +49,10 @@ class AuthenticationController implements IController {
     this._authService.createUser(newUser);
     return res.redirect("/login");
   };
-  private logout = async (req: express.Request, res: express.Response) => {};
+  private logout = async (req: express.Request, res: express.Response) => {
+    req.logOut(); // will destroy the current session
+    res.redirect("/auth/login");
+  };
 }
 
 export default AuthenticationController;
