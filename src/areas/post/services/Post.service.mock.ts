@@ -9,21 +9,27 @@ export class MockPostService implements IPostService {
     // throw new Error("Method not implemented.");
 
     // tried to add post to current user's list of posts
-
     let userIndex;
     database.users.forEach((user, index) => {
       if (user.username == username) {
         return userIndex = index;
       }
     })
+
     database.users[userIndex].posts.push(post);
     console.log(post)
-
-    posts.push(post);
   }
   getAllPosts(username: string): IPost[] {
     // 🚀 Implement this yourself.
-    throw new Error("Method not implemented.");
+    let userIndex;
+    database.users.forEach((user, index) => {
+      if (user.username == username) {
+
+        return userIndex = index;
+
+      }
+    })
+    return database.users[userIndex].posts
   }
   findById(id: string): IPost {
     // 🚀 Implement this yourself.
@@ -37,5 +43,19 @@ export class MockPostService implements IPostService {
   sortPosts(posts: IPost[]): IPost[] {
     // 🚀 Implement this yourself.
     throw new Error("Method not implemented.");
+  }
+
+  deletePost(postId: string, posts: IPost[]): IPost[] {
+    let deleteIndex;
+  
+    posts.forEach((post, index) => {
+      if (post.postId == postId) {
+        console.log(`index: ${index}`)
+        console.log(`current post looped: ${post.postId}`)
+        return deleteIndex = index;
+      }
+    })
+    posts.splice(deleteIndex, 1)
+    return posts
   }
 }

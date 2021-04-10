@@ -12,7 +12,7 @@ const database: IDatabase = {
       lastName: "Gates",
       posts: [
         {
-          id: "abc1",
+          postId: "abc1",
           userId: "billgates",
           message: "Microsoft is a nice company",
           createdAt: new Date(),
@@ -41,7 +41,7 @@ const database: IDatabase = {
       lastName: "Smith",
       posts: [
         {
-          id: "abc3",
+          postId: "abc3",
           userId: "james123",
           message: "A post by james",
           createdAt: new Date(),
@@ -58,7 +58,7 @@ const database: IDatabase = {
           ],
         },
         {
-          id: "abc5",
+          postId: "abc5",
           userId: "james123",
           message: "Nice weather today in Vancouver",
           createdAt: new Date(),

@@ -18,20 +18,19 @@ class PostController implements IController {
   }
 
   private initializeRoutes () {
-    this.router.use( ensureAuthenticated );
+    // this.router.use( ensureAuthenticated );
     this.router.get(this.path, this.getAllPosts);
     this.router.get(`${this.path}/:id`, this.getPostById);
-    this.router.get(`${this.path}/:id/delete`, this.deletePost);
-    this.router.post(`${this.path}`, this.createPost);
+    this.router.post(`${this.path}/delete`, this.deletePost);
     this.router.post(`${this.path}/:id/comment`, this.createComment);
+    this.router.post(`${this.path}`, this.createPost);
   }
 
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary posts object
   
   private getAllPosts = (req: Request, res: Response) => {
-    console.log(posts);
-    console.log(req.user);
-    res.render("post/views/posts", { posts });
+    const user = req.user.username
+    res.render("post/views/posts", { posts: this._postService.getAllPosts(user) });
   };
 
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary post object
@@ -43,26 +42,36 @@ class PostController implements IController {
   private createComment = async (req: Request, res: Response, next: NextFunction) => {};
 
   private createPost = async (req: Request, res: Response, next: NextFunction) => {
-    // const user = req.user as IUser;
-    const user = database.users[0].username
-    console.log(req.body.postText)
-    console.log("please work")
+    console.log("creating post")
+    const user = req.user.username
     const newPost: IPost = {
-      id: `a ${posts.length++}`,
+      //maybe use nanoid() to get the random postId string
+      postId: `${Math.floor(Math.random() * 1000000)}`,
       message: req.body.postText,
       commentList: [],
-      userId: "billgates",
+      userId: user,
       createdAt: new Date,
       likes: 0,
       reposts: 0,
       comments: 0
     }
-    this._postService.addPost(newPost, user);
-    console.log(posts)
-    res.render("post/views/posts", { posts });
-    // res.render("post/views/posts", { posts: user.posts });
+    this._postService.addPost(newPost, user)
+    // res.render("post/views/posts", { posts: this._postService.getAllPosts(user)});
+    res.redirect("/posts");
   };
-  private deletePost = async (req: Request, res: Response, next: NextFunction) => {};
+
+  private deletePost = async (req: Request, res: Response, next: NextFunction) => {
+    console.log("deleting post")
+    const user = req.user.username
+    const deletePostId = req.body.postToDelete
+    const posts = this._postService.getAllPosts(user)
+    console.log("delete post Id is below")
+    console.log(deletePostId)
+    this._postService.deletePost(deletePostId, posts)
+    // res.render("post/views/posts", { posts: this._postService.getAllPosts(user)});
+    res.redirect("/posts");
+
+  };
 }
 
 export default PostController;
