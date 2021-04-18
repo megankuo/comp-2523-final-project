@@ -42,17 +42,14 @@ export class MockPostService implements IPostService {
         return returnPost = post
       }
     })
- 
   })
-
     return returnPost
-  }
+}
 
   addCommentToPost(message: IComment, postId: string): void {
     // 🚀 Implement this yourself.
-    console.log("i'm here..............")
-    let userIndex: number;
-    let postIndex: number;
+    let userIndex;
+    let postIndex;
     database.users.forEach((user) => {
         user.posts.forEach((post, index) => {
           if(post.id ===postId) {
@@ -68,12 +65,7 @@ export class MockPostService implements IPostService {
         }
       })      
   })
-    console.log("i'm working RIGHT?")
-    console.log(`userIndex ${userIndex}`)
-    console.log(`postIndex ${postIndex}`)
-    console.log(message)
     database.users[userIndex].posts[postIndex].commentList.push(message)
-    console.log(database.users[0].posts[0].commentList)
 }
 
   sortPosts(posts: IPost[]): IPost[] {
@@ -86,8 +78,6 @@ export class MockPostService implements IPostService {
   
     posts.forEach((post, index) => {
       if (post.id == postId) {
-        console.log(`index: ${index}`)
-        console.log(`current post looped: ${post.postId}`)
         return deleteIndex = index;
       }
     })
