@@ -1,9 +1,9 @@
 import express from "express";
-import { stringify } from "node:querystring";
 import passport from "passport";
 import IController from "../../../interfaces/controller.interface";
 import IUser from "../../../interfaces/user.interface";
 import { IAuthenticationService } from "../services";
+import { nanoid } from "nanoid";
 
 // Effort at implementing local MySQL database / ClearDB on Heroku
 
@@ -60,8 +60,8 @@ class AuthenticationController implements IController {
 
 // Efforrt for inserting into MySQL database instead of locally
   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    let sqlInsert = "INSERT INTO user (username, first_name, last_name, password, email)VALUES (:username, :firstName, :lastName, :password, :email));";
-    let newUser: Omit<IUser, "id"> = {
+    let newUser: IUser = {
+      id: nanoid(),
       username: req.body.username,
       firstName: req.body.firstName,
       lastName: req.body.lastName,

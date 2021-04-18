@@ -1,16 +1,13 @@
 import IUser from "../../../interfaces/user.interface";
 import { IAuthenticationService } from "./IAuthentication.service";
 import WrongCredentialsException from "../../../exceptions/WrongCredentialsException";
-import { nanoid } from "nanoid";
-import bcrypt from "bcrypt";
-
 import { dbConfigLocal, database } from "../config/DatabaseConfig";
 var mysql = require('mysql2');
 
 // ❗️ Implement this class much later, once everything works fine with your mock db
 export class AuthenticationService implements IAuthenticationService {
   // ⭐️ _db should be a reference to your real database driver
-  _db = mysql.createPool(dbConfigLocal)
+  _db = mysql.createConnection(dbConfigLocal)
   async findUserByEmail(email: String): Promise<IUser> {
     // 🚀 Talk to your real database here
     throw new Error("Method not implemented.");
@@ -19,18 +16,21 @@ export class AuthenticationService implements IAuthenticationService {
     // 🚀 Talk to your real database here
     throw new Error("Method not implemented.");
   }
-  public async createUser(user: Omit<IUser, "id">): Promise<IUser> {
+  public async createUser(user: IUser): Promise<IUser> {
     // throw new Error( "Method not implemented" );
+    let sqlInsert = "INSERT INTO user (id, username, firstName, lastName, password, email)VALUES (:id, :username, :firstName, :lastName, :password, :email)";
     const newUser: IUser = {
-      id: nanoid(),
+      id: user.id,
       username: user.username,
-      email: user.email,
-      password: user.password,
       firstName: user.firstName,
       lastName: user.lastName,
+      password: user.password,
+      email: user.email
     };
-    console.log(this._db)
-    // this._db.user.push(newUser);
+    this._db.query(sqlInsert, newUser, function (err, result) {
+      if (err) throw err;
+      console.log(result)
+    });
     return newUser;
   }
 }
