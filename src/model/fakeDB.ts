@@ -12,8 +12,9 @@ const database: IDatabase = {
       lastName: "Gates",
       posts: [
         {
-          postId: "abc1",
-          userId: "billgates",
+          id: "abc1",
+          userId: "1",
+          username: "billgates",
           message: "Microsoft is a nice company",
           createdAt: new Date(),
           likes: 3,
@@ -23,13 +24,14 @@ const database: IDatabase = {
             {
               id: "abc2",
               createdAt: "2012-01-09T11:25:13Z",
-              userId: "billgates",
+              userId: "1",
+              username: "billgates",
               message: "this is some random comment",
             },
           ],
         },
       ],
-      following: [],
+      following: ["2"],
       reposts: [],
     },
     {

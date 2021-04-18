@@ -49,9 +49,7 @@ export class MockPostService implements IPostService {
     let deleteIndex;
   
     posts.forEach((post, index) => {
-      if (post.postId == postId) {
-        console.log(`index: ${index}`)
-        console.log(`current post looped: ${post.postId}`)
+      if (post.id == postId) {
         return deleteIndex = index;
       }
     })

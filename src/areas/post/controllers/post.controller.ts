@@ -17,11 +17,7 @@ class PostController implements IController {
     this._postService = postService;
   }
 
-<<<<<<< HEAD
   private initializeRoutes () {
-=======
-  private initializeRoutes() {
->>>>>>> 216a77945660185ed683adfe4dcc1f1274e78945
     // this.router.use( ensureAuthenticated );
     this.router.get(this.path, this.getAllPosts);
     this.router.get(`${this.path}/:id`, this.getPostById);
@@ -34,11 +30,17 @@ class PostController implements IController {
   
   private getAllPosts = (req: Request, res: Response) => {
     const user = req.user.username
+    console.log(req.user.username)
     res.render("post/views/posts", { posts: this._postService.getAllPosts(user) });
   };
 
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary post object
-  private getPostById = async (request: Request, res: Response, next: NextFunction) => {
+  private getPostById = async (req: Request, res: Response, next: NextFunction) => {
+    const user = req.user
+    const postId = req.params.id
+    const post = this.getPostById(postId)
+    console.log(postId)
+
     res.render("post/views/post", { post });
   };
 
@@ -47,19 +49,20 @@ class PostController implements IController {
 
   private createPost = async (req: Request, res: Response, next: NextFunction) => {
     console.log("creating post")
-    const user = req.user.username
+    const user = req.user
     const newPost: IPost = {
       //maybe use nanoid() to get the random postId string
-      postId: `${Math.floor(Math.random() * 1000000)}`,
+      id: `${Math.floor(Math.random() * 1000000)}`,
       message: req.body.postText,
       commentList: [],
-      userId: user,
+      userId: user.id,
+      username: user.username,
       createdAt: new Date,
       likes: 0,
       reposts: 0,
       comments: 0
     }
-    this._postService.addPost(newPost, user)
+    this._postService.addPost(newPost, user.username)
     // res.render("post/views/posts", { posts: this._postService.getAllPosts(user)});
     res.redirect("/posts");
   };
