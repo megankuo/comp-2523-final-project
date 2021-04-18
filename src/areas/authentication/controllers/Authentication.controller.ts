@@ -1,4 +1,5 @@
 import express from "express";
+import { stringify } from "node:querystring";
 import passport from "passport";
 import IController from "../../../interfaces/controller.interface";
 import IUser from "../../../interfaces/user.interface";
@@ -38,17 +39,36 @@ class AuthenticationController implements IController {
 
   // 🔑 These Authentication methods needs to be implemented by you
   private login = async (req: express.Request, res: express.Response, next: express.NextFunction) => {};
+//   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+//     const newUser: Omit<IUser, "id"> = {
+//       username: "tempname",
+//       email: "tempemail",
+//       password: "temppw",
+//       firstName: "fname",
+//       lastName: "lname",
+//     };
+//     this._authService.createUser(newUser);
+//     return res.redirect("/login");
+//   };
+//   private logout = async (req: express.Request, res: express.Response) => {
+//     req.logOut(); // will destroy the current session
+//     res.redirect("/auth/login");
+//   };
+// }
+
+// Inserting into MySQL database instead of locally
   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    const newUser: Omit<IUser, "id"> = {
-      username: "tempname",
-      email: "tempemail",
-      password: "temppw",
-      firstName: "fname",
-      lastName: "lname",
+    let sqlInsert = "INSERT INTO user (username, first_name, last_name, password, email)VALUES (:username, :firstName, :lastName, :password, :email));";
+    let newUser: Omit<IUser, "id"> = {
+      username: req.body.username,
+      firstName: req.body.first_name,
+      lastName: req.body.last_name,
+      password: req.body.password,
+      email: req.body.email
     };
     this._authService.createUser(newUser);
     return res.redirect("/login");
-  };
+  }
   private logout = async (req: express.Request, res: express.Response) => {
     req.logOut(); // will destroy the current session
     res.redirect("/auth/login");
