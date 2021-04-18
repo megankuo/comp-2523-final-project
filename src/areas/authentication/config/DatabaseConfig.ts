@@ -23,9 +23,9 @@ const dbConfigLocal = {
 
 export const database = () => {
     if (is_heroku) {
-        var database = mysql.createPool(dbConfigHeroku);
+        return mysql.createPool(dbConfigHeroku);
     }
     else {
-        var database = mysql.createPool(dbConfigLocal);
+        return mysql.createPool(dbConfigLocal);
     }
 }
