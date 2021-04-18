@@ -6,7 +6,6 @@ import IUser from "../../../interfaces/user.interface";
 import { IAuthenticationService } from "../services";
 
 // Effort at implementing local MySQL database / ClearDB on Heroku
-import { db } from "../config/DatabaseConfig";
 
 class AuthenticationController implements IController {
   public path = "/auth";

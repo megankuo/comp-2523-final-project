@@ -4,7 +4,6 @@ import { IAuthenticationService } from "./IAuthentication.service";
 import WrongCredentialsException from "../../../exceptions/WrongCredentialsException";
 import { nanoid } from "nanoid";
 import bcrypt from "bcrypt";
-import { db } from "../config/DatabaseConfig"
 
 export class MockAuthenticationService implements IAuthenticationService {
   readonly _db = database;
@@ -32,16 +31,16 @@ export class MockAuthenticationService implements IAuthenticationService {
   }
 
   public async createUser(user: Omit<IUser, "id">): Promise<IUser> {
+    // throw new Error( "Method not implemented" );
     const newUser: IUser = {
       id: nanoid(),
       username: user.username,
       email: user.email,
-      password: user.password,
+      password: await bcrypt(user.firstName, 10),
       firstName: user.firstName,
       lastName: user.lastName,
     };
     this._db.users.push(newUser);
-    console.log(newUser)
     return newUser;
   }
 }
