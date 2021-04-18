@@ -20,7 +20,7 @@ I worked on the following tasks:
 
 1. <Insert Video or Link to thing you needed to research>
 
-### Megan Kuo:
+### Jo Jo Lam:
 I worked on the following tasks:
 
 1. <Insert Some Task Here> - This task is responsible for xyz functionality.
