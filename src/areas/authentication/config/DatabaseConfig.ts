@@ -21,7 +21,7 @@ const dbConfigLocal = {
 	namedPlaceholders: true
 };
 
-export const database = () => {
+export const db = () => {
     if (is_heroku) {
         return mysql.createPool(dbConfigHeroku);
     }

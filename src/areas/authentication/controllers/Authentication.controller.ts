@@ -5,6 +5,9 @@ import IController from "../../../interfaces/controller.interface";
 import IUser from "../../../interfaces/user.interface";
 import { IAuthenticationService } from "../services";
 
+// Effort at implementing local MySQL database / ClearDB on Heroku
+import { db } from "../config/DatabaseConfig";
+
 class AuthenticationController implements IController {
   public path = "/auth";
   public router = express.Router();
@@ -56,13 +59,13 @@ class AuthenticationController implements IController {
 //   };
 // }
 
-// Inserting into MySQL database instead of locally
+// Efforrt for inserting into MySQL database instead of locally
   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     let sqlInsert = "INSERT INTO user (username, first_name, last_name, password, email)VALUES (:username, :firstName, :lastName, :password, :email));";
     let newUser: Omit<IUser, "id"> = {
       username: req.body.username,
-      firstName: req.body.first_name,
-      lastName: req.body.last_name,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       password: req.body.password,
       email: req.body.email
     };
