@@ -8,16 +8,26 @@ var mysql = require('mysql2');
 export class AuthenticationService implements IAuthenticationService {
   // ⭐️ _db should be a reference to your real database driver
   _db = mysql.createConnection(dbConfigLocal)
-  async findUserByEmail(email: String): Promise<IUser> {
-    // 🚀 Talk to your real database here
-    throw new Error("Method not implemented.");
+
+  public async getUserByUsername(username: String): Promise<IUser> {
+    let findUser = "SELECT username FROM user";
+    if (username == findUser) {
+      throw new Error("This username has already been registered.");
+    }
+    return;
   }
-  async getUserByEmailAndPassword(email: string, password: string): Promise<IUser> {
-    // 🚀 Talk to your real database here
-    throw new Error("Method not implemented.");
+
+  public async getUserByEmailAndPassword(email: string, password: string): Promise<IUser> {
+    let findEmail = "SELECT email FROM user";
+    let findPassword = "SELECT password from WHERE user email =" + '"' + email + '"' + ";";
+    if (email == findEmail || password == findPassword) {
+      mysql.connection.release();
+      throw new Error("This email has already been registered.");
+    }
+    return;
   }
+
   public async createUser(user: IUser): Promise<IUser> {
-    // throw new Error( "Method not implemented" );
     let sqlInsert = "INSERT INTO user (id, username, firstName, lastName, password, email)VALUES (:id, :username, :firstName, :lastName, :password, :email)";
     const newUser: IUser = {
       id: user.id,
@@ -29,7 +39,6 @@ export class AuthenticationService implements IAuthenticationService {
     };
     this._db.query(sqlInsert, newUser, function (err, result) {
       if (err) throw err;
-      console.log(result)
     });
     return newUser;
   }

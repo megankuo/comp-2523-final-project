@@ -41,6 +41,8 @@ class AuthenticationController implements IController {
 
   // 🔑 These Authentication methods needs to be implemented by you
   private login = async (req: express.Request, res: express.Response, next: express.NextFunction) => {};
+
+// Megan's Implementation of Local Database
 //   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
 //     const newUser: Omit<IUser, "id"> = {
 //       username: "tempname",
@@ -58,7 +60,7 @@ class AuthenticationController implements IController {
 //   };
 // }
 
-// Efforrt for inserting into MySQL database instead of locally
+// Linda's Implementation of Database Registration to MySQL -> Takes the data that is passed in from the registration post
   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     let newUser: IUser = {
       id: nanoid(),
@@ -68,7 +70,9 @@ class AuthenticationController implements IController {
       password: req.body.password,
       email: req.body.email
     };
-    this._authService.createUser(newUser);
+    this._authService.getUserByEmailAndPassword(newUser.email, newUser.password);
+    this._authService.getUserByUsername(newUser.username);
+    this._authService.createUser(newUser); // Passes data to createUser
     return res.redirect("/login");
   }
   private logout = async (req: express.Request, res: express.Response) => {
