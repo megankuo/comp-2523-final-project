@@ -1,7 +1,7 @@
 import IUser from "../../../interfaces/user.interface";
 import { IAuthenticationService } from "./IAuthentication.service";
 import WrongCredentialsException from "../../../exceptions/WrongCredentialsException";
-import { dbConfigHeroku, database } from "../config/DatabaseConfig";
+import { dbConfigHeroku, dbConfigLocal, database } from "../config/DatabaseConfig";
 import bcrypt from "bcrypt";
 import { isUnparsedPrepend } from "typescript";
 
