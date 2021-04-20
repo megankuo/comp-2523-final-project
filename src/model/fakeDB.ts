@@ -23,7 +23,7 @@ const database: IDatabase = {
           commentList: [
             {
               id: "abc2",
-              createdAt: "2012-01-09T11:25:13Z",
+              createdAt: new Date(),
               userId: "1",
               username: "billgates",
               message: "this is some random comment",
@@ -84,55 +84,55 @@ const database: IDatabase = {
 };
 
 // -------- Note: I only created these as a simple test example for you, delete them later and use above db or your own --------------
-const userDatabase = [
-  {
-    id: "1",
-    firstName: "Armaan",
-    lastName: "Armaan",
-    email: "ad123@gmail.com",
-    password: "ad123123!",
-    role: "admin",
-  },
-  {
-    id: "2",
-    firstName: "John",
-    lastName: "Armaan",
-    email: "jo123@gmail.com",
-    password: "jo123",
-    role: "user",
-  },
-];
+// const userDatabase = [
+//   {
+//     id: "1",
+//     firstName: "Armaan",
+//     lastName: "Armaan",
+//     email: "ad123@gmail.com",
+//     password: "ad123123!",
+//     role: "admin",
+//   },
+//   {
+//     id: "2",
+//     firstName: "John",
+//     lastName: "Armaan",
+//     email: "jo123@gmail.com",
+//     password: "jo123",
+//     role: "user",
+//   },
+// ];
 
-const post = {
-  postId: "1",
-  userId: "billgates",
-  createdAt: "Thursday, March 2nd",
-  message: "I'm seriously considering acquiring devHouse for 6 billion dollars...",
-  comments: "0",
-  reposts: "0",
-  likes: "0",
-  commentList: [],
-};
+// const post = {
+//   postId: "1",
+//   userId: "billgates",
+//   createdAt: "Thursday, March 2nd",
+//   message: "I'm seriously considering acquiring devHouse for 6 billion dollars...",
+//   comments: "0",
+//   reposts: "0",
+//   likes: "0",
+//   commentList: [],
+// };
 
-const posts = [
-  {
-    id: "5",
-    userId: "john",
-    createdAt: new Date(),
-    commentList: [],
-    message: "Hi there",
-    reposts: 2,
-    likes: 2,
-  },
-  {
-    id: "4",
-    userId: "john",
-    createdAt: new Date(),
-    commentList: [],
-    message: "this is a new post by me",
-    reposts: 2,
-    likes: 2,
-  },
-];
+// const posts = [
+//   {
+//     id: "5",
+//     userId: "john",
+//     createdAt: new Date(),
+//     commentList: [],
+//     message: "Hi there",
+//     reposts: 2,
+//     likes: 2,
+//   },
+//   {
+//     id: "4",
+//     userId: "john",
+//     createdAt: new Date(),
+//     commentList: [],
+//     message: "this is a new post by me",
+//     reposts: 2,
+//     likes: 2,
+//   },
+// ];
 
-export { userDatabase, database, post, posts };
+export { database };

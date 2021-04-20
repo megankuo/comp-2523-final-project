@@ -21,12 +21,27 @@ I also needed to research on Youtube and Google the following things:
 
 1. <Insert Video or Link to thing you needed to research>
 
-John Chen:
+Jo Jo in the addPost branch
 I worked on the following tasks:
 
-1. <Insert Some Task Here> - This task is responsible for xyz functionality.
-2. <Insert Some Task Here> - This task is responsible for xyz functionality.
-3. <Insert Some Task Here> - This task is responsible for xyz functionality.
+Successfully using the mockDB:
+
+1. get all post by the current user
+2. create post
+3. can delete post
+4. can click into post to view commments
+5. can add comment to that post
+6. updated to show current user's name and email on posts.ejs
+7. hooked up to cleardb
+8. created post table in cleardb using workbench
+  
+Researched and attempted in branch jojosPlayground to deal with postservice hooked up to cleardb
+
+1. Can grab posts from db and print to console, however,
+2. researched and failed to get ejs to display the said posts
+3. kinda assisted linda in successfully pushing new user info from registration
+4. understand that i need to write sql statements to create post, delete post, create comments, search for posts/people
+
 
 March 16th (Second Sprint Complete)
 Amy Chan:
