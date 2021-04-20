@@ -2,14 +2,8 @@ import { Request, Response, NextFunction, Router } from "express";
 import IController from "../../../interfaces/controller.interface";
 import IPostService from "../services/IPostService";
 import { nanoid } from "nanoid";
-// for mock
-// import { database, post, posts } from "../../../model/fakeDB";
 import IUser from "../../../interfaces/user.interface";
 import IPost from "../../../interfaces/post.interface";
-
-import database from "../../../databaseConnection"
-
-import { ensureAuthenticated } from "../../../middleware/authentication.middleware";
 import IComment from "../../../interfaces/comment.interface";
 
 class PostController implements IController {
@@ -34,30 +28,15 @@ class PostController implements IController {
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary posts object
   
   private getAllPosts = (req: Request, res: Response) => {
-    // when using mock
     const user = req.user as IUser;
     const username = user.username;
-    res.render("post/views/posts", { posts: this._postService.getAllPosts(username), user: req.user });
-   
-    // database.getConnection((err, dbConnection) => {
-    //   if (err) {
-    //     console.log(err);
-    //   } else {
-    //     res.render("post/views/posts", { posts: this._postService.getAllPosts(userId)})
-    //   }
-      
-    // })
-    
+    res.render("post/views/posts", { posts: this._postService.getAllPosts(username), user: req.user })    
   };
 
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary post object
   private getPostById = async (req: Request, res: Response, next: NextFunction) => {
-    // when using mock
     const post = await this._postService.findById(req.params.id);
     res.render("post/views/post", { post, user: req.user });
-
-    // when using clearDB if it works
-
   };
 
   // 🚀 These post methods needs to be implemented by you
@@ -90,7 +69,6 @@ class PostController implements IController {
       comments: 0
     }
     await this._postService.addPost(newPost, user.username)
-    // res.render("post/views/posts", { posts: this._postService.getAllPosts(user)});
     res.redirect("/posts");
   };
 
@@ -99,7 +77,6 @@ class PostController implements IController {
     const user = req.user as IUser;
     const posts = this._postService.getAllPosts(user.username);
     await this._postService.deletePost(deletePostId, posts);
-    // res.render("post/views/posts", { posts: this._postService.getAllPosts(user)});
     res.redirect("/posts");
 
   };

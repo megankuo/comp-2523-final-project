@@ -43,8 +43,9 @@ const database: IDatabase = {
       lastName: "Smith",
       posts: [
         {
-          postId: "abc3",
-          userId: "james123",
+          id: "abc3",
+          userId: "2",
+          username: "james",
           message: "A post by james",
           createdAt: new Date(),
           likes: 30,
@@ -53,15 +54,17 @@ const database: IDatabase = {
           commentList: [
             {
               id: "abc4",
-              createdAt: "2012-01-05T04:13:24Z",
-              userId: "billgates",
+              createdAt: new Date(),
+              userId: "1",
+              username: "billgates",
               message: "Cool post james. Glad I decided to follow you.",
             },
           ],
         },
         {
-          postId: "abc5",
+          id: "abc5",
           userId: "james123",
+          username: "james",
           message: "Nice weather today in Vancouver",
           createdAt: new Date(),
           likes: 30,
@@ -69,9 +72,10 @@ const database: IDatabase = {
           comments: 12,
           commentList: [
             {
-              id: "abc6",
-              userId: "billgates",
-              createdAt: "2012-02-05T05:13:24Z",
+              id: "abc4",
+              createdAt: new Date(),
+              userId: "1",
+              username: "billgates",
               message: "The weather is always nice when you're rich like me.",
             },
           ],
