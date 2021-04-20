@@ -12,21 +12,21 @@ export const dbConfigHeroku = {
     namedPlaceholders: true // Requires the use of named placeholders instead of directly pushing values
 };
 
-// Only used to test in local host
-// export const dbConfigLocal = {
-// 	host: "localhost",
-// 	user: "root",
-// 	password: "Il0v3y0u~",
-// 	database: "devhouse",
-// 	multipleStatements: false,
-// 	namedPlaceholders: true
-// };
+//Only used to test in local host
+export const dbConfigLocal = {
+	host: "localhost",
+	user: "root",
+	password: "Il0v3y0u~",
+	database: "devhouse",
+	multipleStatements: false,
+	namedPlaceholders: true
+};
 
 export const database = () => {
-    // if (is_heroku) {
+    if (is_heroku) {
         return mysql.createPool(dbConfigHeroku);
-    // }
-    // else {
-    //     return mysql.createPool(dbConfigLocal);
-    // }
+    }
+    else {
+        return mysql.createPool(dbConfigLocal);
+    }
 }
