@@ -1,6 +1,8 @@
 import IPost from "../../../interfaces/post.interface";
 import IPostService from "./IPostService";
-import { database, posts } from "../../../model/fakeDB";
+import { database, post, posts } from "../../../model/fakeDB";
+import { isConstructorDeclaration } from "typescript";
+import IComment from "../../../interfaces/comment.interface";
 
 // ⭐️ Feel free to change this class in any way you like. It is simply an example...
 export class MockPostService implements IPostService {
@@ -33,12 +35,38 @@ export class MockPostService implements IPostService {
   }
   findById(id: string): IPost {
     // 🚀 Implement this yourself.
-    throw new Error("Method not implemented.");
-  }
-  addCommentToPost(message: { id: string; createdAt: string; userId: string; message: string }, postId: string): void {
+    let returnPost: IPost;
+    database.users.forEach((user) => {
+    user.posts.forEach((post) => {
+      if(post.id ===id) {
+        return returnPost = post
+      }
+    })
+  })
+    return returnPost
+}
+
+  addCommentToPost(message: IComment, postId: string): void {
     // 🚀 Implement this yourself.
-    throw new Error("Method not implemented.");
-  }
+    let userIndex;
+    let postIndex;
+    database.users.forEach((user) => {
+        user.posts.forEach((post, index) => {
+          if(post.id ===postId) {
+            return postIndex = index;
+          }
+        })      
+    })
+
+    database.users.forEach((user, index) => {
+      user.posts.forEach((post) => {
+        if(post.id ===postId) {
+          return userIndex = index;
+        }
+      })      
+  })
+    database.users[userIndex].posts[postIndex].commentList.push(message)
+}
 
   sortPosts(posts: IPost[]): IPost[] {
     // 🚀 Implement this yourself.

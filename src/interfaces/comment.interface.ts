@@ -3,7 +3,7 @@ interface IComment {
   message: string;
   userId: string;
   username: string;
-  createdAt: string;
+  createdAt: Date;
 }
 
 export default IComment;

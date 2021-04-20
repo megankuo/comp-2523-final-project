@@ -1,4 +1,6 @@
 import IPost from "../../../interfaces/post.interface";
+import IComment from "../../../interfaces/comment.interface";
+
 
 // ⭐️ Feel free to change this interface in any way you like. It is simply an example...
 export default interface IPostService {
@@ -11,7 +13,7 @@ export default interface IPostService {
   findById(id: string): IPost | undefined;
 
   addCommentToPost(
-    message: { id: string; createdAt: string; userId: string; message: string },
+    message: IComment,
     postId: string
   ): IPost | void;
 
