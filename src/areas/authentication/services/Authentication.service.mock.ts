@@ -6,6 +6,12 @@ import { nanoid } from "nanoid";
 import bcrypt from "bcrypt";
 
 export class MockAuthenticationService implements IAuthenticationService {
+  findUserByUsername ( username: String ): Promise<IUser> {
+    throw new Error( "Method not implemented." );
+  }
+  findUserByEmailAndPassword ( email: string, password: string ): Promise<IUser> {
+    throw new Error( "Method not implemented." );
+  }
   readonly _db = database;
 
   public async getUserByEmailAndPassword(email: string, password: string): Promise<IUser> {

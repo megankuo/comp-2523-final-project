@@ -13,14 +13,14 @@ export const dbConfigHeroku = {
 };
 
 // Only used to test in local host
-// export const dbConfigLocal = {
-// 	host: "localhost",
-// 	user: "root",
-// 	password: "Il0v3y0u~",
-// 	database: "devhouse",
-// 	multipleStatements: false,
-// 	namedPlaceholders: true
-// };
+export const dbConfigLocal = {
+	host: "localhost",
+	user: "root",
+	password: "Il0v3y0u~",
+	database: "devhouse",
+	multipleStatements: false,
+	namedPlaceholders: true
+};
 
 export const database = () => {
     // if (is_heroku) {
