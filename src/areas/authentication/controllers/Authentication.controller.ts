@@ -70,8 +70,8 @@ class AuthenticationController implements IController {
       password: req.body.password,
       email: req.body.email
     };
-    this._authService.getUserByEmailAndPassword(newUser.email, newUser.password);
-    this._authService.getUserByUsername(newUser.username);
+    this._authService.findUserByEmailAndPassword(newUser.email, newUser.password);
+    this._authService.findUserByUsername(newUser.username);
     this._authService.createUser(newUser); // Passes data to createUser
     return res.redirect("/login");
   }

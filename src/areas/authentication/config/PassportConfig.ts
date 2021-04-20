@@ -43,7 +43,7 @@ export default class PassportConfig {
 
   private static async signIn(email: string, password: string, done) {
     try {
-      PassportConfig._user = await PassportConfig._authService.getUserByEmailAndPassword(email, password);
+      PassportConfig._user = await PassportConfig._authService.findUserByEmailAndPassword(email, password);
       return done(null, PassportConfig._user);
     } catch (e) {
       done(null, false, e);
