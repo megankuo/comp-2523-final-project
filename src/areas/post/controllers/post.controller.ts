@@ -7,7 +7,7 @@ import { nanoid } from "nanoid";
 import IUser from "../../../interfaces/user.interface";
 import IPost from "../../../interfaces/post.interface";
 
-import database from "../../../databaseConnection"
+// import database from "../../../databaseConnection"
 
 import { ensureAuthenticated } from "../../../middleware/authentication.middleware";
 import IComment from "../../../interfaces/comment.interface";
@@ -37,7 +37,22 @@ class PostController implements IController {
     // when using mock
     const user = req.user as IUser;
     const username = user.username;
-    res.render("post/views/posts", { posts: this._postService.getAllPosts(username), user: req.user });
+    const results = this._postService.getAllPosts(username);
+    console.log('This is from post controller');
+    console.log(results);
+
+    let post = [{
+            id: 123,
+            message: 'hellooooo',
+            userId: '23rewrgrwg',
+            createdAt: 'some date',
+            likes: 0,
+            reposts: 0,
+            comments: 0,
+            commentList: []
+          }]
+
+    res.render("post/views/posts", { posts: post, user: req.user });
    
     // database.getConnection((err, dbConnection) => {
     //   if (err) {
@@ -48,7 +63,7 @@ class PostController implements IController {
       
     // })
     
-  };
+  }
 
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary post object
   private getPostById = async (req: Request, res: Response, next: NextFunction) => {

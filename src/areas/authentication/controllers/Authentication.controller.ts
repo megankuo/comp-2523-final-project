@@ -1,14 +1,17 @@
 import express from "express";
 import passport from "passport";
 import IController from "../../../interfaces/controller.interface";
+import IUser from "../../../interfaces/user.interface";
 import { IAuthenticationService } from "../services";
 
 class AuthenticationController implements IController {
   public path = "/auth";
   public router = express.Router();
+  private _authService: IAuthenticationService;
 
   constructor(service: IAuthenticationService) {
     this.initializeRoutes();
+    this._authService = service;
   }
 
   private initializeRoutes() {
@@ -35,8 +38,21 @@ class AuthenticationController implements IController {
 
   // 🔑 These Authentication methods needs to be implemented by you
   private login = async (req: express.Request, res: express.Response, next: express.NextFunction) => {};
-  private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {};
-  private logout = async (req: express.Request, res: express.Response) => {};
+  private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    const newUser: Omit<IUser, "id"> = {
+      username: "tempname",
+      email: "tempemail",
+      password: "temppw",
+      firstName: "fname",
+      lastName: "lname",
+    };
+    this._authService.createUser(newUser);
+    return res.redirect("/login");
+  };
+  private logout = async (req: express.Request, res: express.Response) => {
+    req.logOut(); // will destroy the current session
+    res.redirect("/auth/login");
+  };
 }
 
 export default AuthenticationController;

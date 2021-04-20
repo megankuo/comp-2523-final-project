@@ -28,11 +28,11 @@ export default class PassportConfig {
     passport.deserializeUser(PassportConfig.deserializeUser);
   }
 
-  private static serializeUser(user: IUser, done): void {
+  private static serializeUser(user: IUser, done: (err: any, id?: string) => void): void {
     done(null, user.email);
   }
 
-  private static async deserializeUser(email: string, done) {
+  private static async deserializeUser(email: string, done: (err: any, user?: Express.User | false | null) => void) {
     try {
       const user = await PassportConfig._authService.findUserByEmail(email);
       return done(null, user);

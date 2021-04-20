@@ -1,8 +1,8 @@
-const mysql = require('mysql2');
+import mysql from "mysql2"
 
 const is_heroku = process.env.IS_HEROKU || false;
 
-const dbConfigHeroku = {
+export const dbConfigHeroku = {
 	host: "us-cdbr-east-03.cleardb.com",
 	user: "b6fdd10d08cf4c",
 	password: "14bbc16a",
@@ -25,7 +25,5 @@ const dbConfigLocal = {
 // } else {
 // 	var database = mysql.createPool(dbConfigLocal);
 // }
-var database = mysql.createPool(dbConfigHeroku);
+export const database = mysql.createPool(dbConfigHeroku);
 
-module.exports = database;
-		
