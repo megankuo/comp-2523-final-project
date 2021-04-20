@@ -37,23 +37,24 @@ Branch: addPost
 
 I worked on the following tasks / successfully using the mockDB:
 
-1. Get all post by the current user
+1. Get all post by the current user (enabled by the success of megan's auth)
 2. Create post
 3. Can delete post
 4. Can click into post to view commments
 5. Can add comment to that post
 6. Updated to show current user's name and email on posts.ejs
-7. Hooked up to ClearDB
 8. Created post table in cleardb using workbench
 
 #### Research:
 
-Researched and attempted in branch jojosPlayground to deal with postservice hooked up to cleardb
+Researched and attempted in branch jojosPlayground to deal with postservice thats hooked up to cleardb
 
-1. Can grab posts from db and print to console
-2. Researched and failed to get ejs to display the said posts
-3. Kinda assisted Linda in successfully pushing new user info from registration
-4. Understand that i need to write sql statements to create post, delete post, create comments, search for posts/people
+1. Can grab posts from db and print to consoleee
+2. Researched and failed with Megan to get ejs to display the said posts
+3. referenced database labs
+4. Kinda assisted Linda in successfully pushing new user info from registration
+5. Understand that i need to write sql statements to create post, delete post, create comments, search for posts/people
+6. helped and failed to troubleshoot linda
 
 ### Linda Nguyen:
 
